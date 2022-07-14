@@ -45,7 +45,8 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <h1><div>{rows.map((mytable) => (<h1>{mytable.id} - {mytable.value}</h1>))}</div></h1>
+      <h1><div>{rows.map((mytable) => (<h1 key={mytable.id}>{mytable.id} - {mytable.value}</h1>))}</div></h1>
+
       <Grid variant="filled">
         {products.slice(0, 3).map((product: any, i: number) => (
           <ProductCard
