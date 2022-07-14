@@ -2,6 +2,7 @@ import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
 import { Grid, Marquee, Hero } from '@components/ui'
+import { PrismaClient } from '@prisma/client'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
@@ -23,9 +24,14 @@ export async function getStaticProps({
   const { products } = await productsPromise
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
+  const prisma = new PrismaClient()
+
+  const {allRows} = await prisma.mytable.findMany()
+
 
   return {
     props: {
+      allRows,
       products,
       categories,
       brands,
@@ -36,11 +42,11 @@ export async function getStaticProps({
 }
 
 export default function Home({
-  products,
+  products,allRows,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <h1><div>my test</div></h1>
+      <h1><div>{allRows}</div></h1>
       <Grid variant="filled">
         {products.slice(0, 3).map((product: any, i: number) => (
           <ProductCard

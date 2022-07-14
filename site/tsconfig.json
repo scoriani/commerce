@@ -3,6 +3,8 @@
     "baseUrl": ".",
     "target": "esnext",
     "module": "esnext",
+    "sourceMap": true,
+    "outDir": "dist",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
