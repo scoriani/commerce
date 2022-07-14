@@ -26,12 +26,12 @@ export async function getStaticProps({
   const { categories, brands } = await siteInfoPromise
   const prisma = new PrismaClient()
 
-  const {allRows} = await prisma.mytable.findMany()
+  const {values} = await prisma.mytable.findMany()
 
 
   return {
     props: {
-      allRows,
+      values,
       products,
       categories,
       brands,
@@ -42,11 +42,11 @@ export async function getStaticProps({
 }
 
 export default function Home({
-  products,allRows,
+  products,values,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <h1><div>{allRows}</div></h1>
+      <h1><div>{values}</div></h1>
       <Grid variant="filled">
         {products.slice(0, 3).map((product: any, i: number) => (
           <ProductCard
